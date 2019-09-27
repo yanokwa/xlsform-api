@@ -25,7 +25,8 @@ def post():
             validate=False,
             pretty_print=True
         )
-        logger.warning(form_errors)
+        if form_errors:
+            logger.warning(form_errors)
         return send_file(xform_fp.name, mimetype=XML_MIME_TYPE)
     except Exception as e:
         logger.error(e)
