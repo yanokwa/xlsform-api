@@ -37,6 +37,12 @@ In production:
 
 This will launch the API on port 5000.
 
+To test using an excel file:
+
+.. code:: bash
+
+    curl --request POST --data-binary @<FILE_NAME>.xlsx http://127.0.0.1:5000/api/v1/convert
+
 Contributing
 ------------
 
