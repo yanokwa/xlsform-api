@@ -25,7 +25,7 @@ def post():
             form_errors = xls2xform.xls2xform_convert(
                 xlsform_path=str(xls_fp.name),
                 xform_path=str(xform_fp.name),
-                validate=False,
+                validate=True,
                 pretty_print=True
             )
 
