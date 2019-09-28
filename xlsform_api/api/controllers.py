@@ -26,7 +26,7 @@ def post():
                 xlsform_path=str(xlsform_fp.name),
                 xform_path=str(xform_fp.name),
                 validate=True,
-                pretty_print=True
+                pretty_print=False
             )
 
             if form_errors:
