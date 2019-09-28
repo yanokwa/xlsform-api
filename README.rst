@@ -9,6 +9,7 @@ Requirements
 * Python 3
 * pip 3
 * virtualenv
+* JDK < 13 (until pyxform is updated)
 
 Installation
 ------------
