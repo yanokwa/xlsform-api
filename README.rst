@@ -1,7 +1,7 @@
 XLSForm API
 ===========
 
-XLSForm API is a Flask web service that internally uses xls2xform for converting Excel.
+XLSForm API is a Flask web service that internally uses pyxform to convert a XLSForm to an ODK XForm.
 
 Requirements
 ------------
