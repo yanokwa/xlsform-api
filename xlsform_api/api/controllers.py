@@ -29,22 +29,23 @@ def post():
             if convert_status:
                 logger.warning(convert_status)
 
-            # if a file exists, there are no errors
             if os.path.isfile(xform_fp.name):
-                return send_file(xform_fp.name, mimetype="application/xml")
+                return response(status=GOOD_REQUEST_CODE, result=send_file(xform_fp.name, mimetype="application/xml"), warnings=convert_status)
             else:
-                return format_status(convert_status)
+                return response(status=BAD_REQUEST_CODE, error=convert_status)
 
         except Exception as e:
             logger.error(e)
-            return format_status(e)
+            return response(status=BAD_REQUEST_CODE, error=str(e))
             
         finally:
             xform_fp.close()
             xlsform_fp.close()
 
-def format_status(e=None):
+def response(status=None, result=None, warnings=None, error=None):
     return jsonify(
-        status=BAD_REQUEST_STATUS_CODE,
-        message=str(e)
-    ), BAD_REQUEST_STATUS_CODE
+        status=status,
+        result=result,
+        warnings=warnings,
+        error=error
+    ), status
