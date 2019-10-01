@@ -16,8 +16,8 @@ GOOD_REQUEST_CODE = 200
 def post():
     with TemporaryDirectory() as temp_dir_name:
         try:
-            xform_fp = open(os.path.join(temp_dir_name, "tmp.xlsx"), "w")
-            xlsform_fp = open(os.path.join(temp_dir_name, "tmp.xml"), "wb")
+            xform_fp = open(os.path.join(temp_dir_name, "tmp.xml"), "w")
+            xlsform_fp = open(os.path.join(temp_dir_name, "tmp.xlsx"), "wb")
             xlsform_fp.write(request.get_data())
             convert_status = xls2xform.xls2xform_convert(
                 xlsform_path=str(xlsform_fp.name),
@@ -45,6 +45,6 @@ def post():
 
 def format_status(e=None):
     return jsonify(
-        status=BAD_REQUEST_CODE,
+        status=BAD_REQUEST_STATUS_CODE,
         message=str(e)
-    ), BAD_REQUEST_CODE
+    ), BAD_REQUEST_STATUS_CODE
