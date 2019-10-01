@@ -8,9 +8,6 @@ from pyxform import xls2xform
 api = Blueprint("api", __name__)
 logger = logging.getLogger(__name__)
 
-BAD_REQUEST_CODE = 400
-GOOD_REQUEST_CODE = 200
-
 # To test: curl --request POST --data-binary @<FILE_NAME>.xlsx http://127.0.0.1:5000/api/v1/convert
 @api.route("/convert", methods=["POST"])
 def post():
@@ -32,17 +29,15 @@ def post():
 
                 if os.path.isfile(xform.name):
                     return response(
-                        status=GOOD_REQUEST_CODE,
-                        result=xform.read(),
-                        warnings=convert_status,
+                        status=200, result=xform.read(), warnings=convert_status
                     )
                 else:
-                    return response(status=BAD_REQUEST_CODE, error=convert_status)
+                    return response(error=convert_status)
 
         except Exception as e:
             logger.error(e)
-            return response(status=BAD_REQUEST_CODE, error=str(e))
+            return response(error=str(e))
 
 
-def response(status=None, result=None, warnings=None, error=None):
+def response(status=400, result=None, warnings=None, error=None):
     return jsonify(status=status, result=result, warnings=warnings, error=error), status
